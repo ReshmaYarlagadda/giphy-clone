@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumenGIFs - Discover Amazing GIFs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'deep-navy': '#0f172a',
+                        'indigo-deep': '#1e1b4b',
+                        'teal-bright': '#14b8a6',
+                        'cyan-glow': '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-deep-navy text-white min-h-screen">
+    <div class="fixed inset-0 gradient-bg -z-10"></div>
+    
+    <header class="relative z-50 p-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-teal-bright to-cyan-glow flex items-center justify-center">
+                    <span class="text-2xl font-bold text-deep-navy">L</span>
+                </div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-white via-teal-bright to-cyan-glow bg-clip-text text-transparent">LumenGIFs</h1>
+            </div>
+            <nav class="hidden md:flex justify-center space-x-8 text-center w-full">
+              <a href="#" class="hover:text-teal-bright transition-colors font-medium">Trending</a>
+              <a href="#" class="hover:text-teal-bright transition-colors font-medium">Upload</a>
+              <a href="#" class="hover:text-teal-bright transition-colors font-medium">About</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <section class="relative z-40 px-6 py-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-teal-bright to-cyan-glow bg-clip-text text-transparent">
+                Discover
+            </h2>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 font-light">From serious to silly — GIFs for every vibe</p>
+            
+            <div class="glassmorphism-strong rounded-full p-2 max-w-2xl mx-auto shadow-2xl">
+                <div class="flex items-center">
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search millions of GIFs..." 
+                        class="search-glow flex-1 bg-transparent px-6 py-4 text-lg outline-none placeholder-gray-400 font-medium rounded-l-full"
+                        onkeypress="handleSearchKeypress(event)">
+                    <button 
+                        onclick="searchGifs()"
+                        class="bg-gradient-to-r from-teal-bright to-cyan-glow px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-deep-navy">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Stats & Profile -->
+        <div class="flex flex-col lg:flex-row gap-8 mb-12">
+            <div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl font-bold text-teal-bright mb-2">2.8M</div>
+                    <div class="text-gray-300 font-medium">Trending GIFs</div>
+                </div>
+                <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl font-bold text-cyan-glow mb-2">Reactions</div>
+                    <div class="text-gray-300 font-medium">Top Category</div>
+                </div>
+                <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+                    <div class="text-3xl font-bold text-teal-bright mb-2">50M+</div>
+                    <div class="text-gray-300 font-medium">Total GIFs</div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center lg:justify-end">
+                <div class="relative">
+                    <div class="w-28 h-28 rounded-full neon-glow bg-gradient-to-r from-teal-bright to-cyan-glow p-1">
+                        <img 
+                            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExazA3MmJ4dHFnNGJ6NGV1dWVxMzFpYmNxNzlpaDBoeHlreTFvbWVkZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26ufdipQqU2lhNA4g/giphy.gif" 
+                            alt="Profile" 
+                            class="w-full h-full rounded-full object-cover"
+                            onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTEyIiBoZWlnaHQ9IjExMiIgdmlld0JveD0iMCAwIDExMiAxMTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iNTYiIGN5PSI1NiIgcj0iNTYiIGZpbGw9IiMxZTFiNGIiLz48Y2lyY2xlIGN4PSI1NiIgY3k9IjQ2IiByPSIxOCIgZmlsbD0iIzE0YjhhNiIvPjxwYXRoIGQ9Ik0yMCA4OGMwLTIwIDEzLjQzLTM2IDMwLTM2aDEyYzE2LjU3IDAgMzAgMTYgMzAgMzYiIGZpbGw9IiMxNGI4YTYiLz48L3N2Zz4=';"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="flex flex-wrap gap-4 mb-12 justify-center">
+            <button onclick="filterByCategory(event, 'all')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300 category-active">
+                 All
+            </button>
+            <button onclick="filterByCategory(event, 'sports')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Sports
+            </button>
+            <button onclick="filterByCategory(event, 'movies')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Movies
+            </button>
+            <button onclick="filterByCategory(event, 'memes')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Memes
+            </button>
+            <button onclick="filterByCategory(event, 'reactions')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Reactions
+            </button>
+            <button onclick="filterByCategory(event, 'gaming')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Gaming
+            </button>
+            <button onclick="filterByCategory(event, 'tech')" class="category-btn glassmorphism px-6 py-3 rounded-full font-semibold transition-all duration-300">
+                 Tech
+            </button>
+        </div>
+
+        <div id="loadingIndicator" class="hidden flex justify-center items-center py-8">
+            <div class="loading-spinner"></div>
+            <span class="ml-3 text-teal-bright font-medium">Loading GIFs...</span>
+        </div>
+
+        <div class="gif-grid" id="gifGrid"></div>
+
+        <div class="text-center mt-12">
+            <button 
+                onclick="loadMoreGifs()"
+                id="loadMoreBtn"
+                class="glassmorphism px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 border border-teal-bright/30 hover:border-teal-bright/60"
+            >
+                Load More GIFs
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center p-6">
+        <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
+        <div class="glassmorphism-strong rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h2 id="modalTitle" class="text-2xl font-bold bg-gradient-to-r from-teal-bright to-cyan-glow bg-clip-text text-transparent"></h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl font-bold hover:scale-110 transition-all">&times;</button>
+                </div>
+                
+                <div class="mb-6 rounded-2xl overflow-hidden bg-black/20">
+                    <img id="modalGif" src="" alt="GIF" class="w-full h-auto max-h-96 object-contain">
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-bold mb-3 text-teal-bright">Tags</h3>
+                    <div id="modalTags" class="flex flex-wrap gap-2"></div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button class="flex-1 bg-gradient-to-r from-teal-bright to-cyan-glow px-6 py-3 rounded-full font-bold hover:shadow-xl transition-all duration-300 hover:scale-105 text-deep-navy">
+                       Share
+                    </button>
+                    <button class="flex-1 glassmorphism px-6 py-3 rounded-full font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                         Download
+                    </button>
+                    <button class="flex-1 glassmorphism px-6 py-3 rounded-full font-bold hover:bg-white/10 transition-all duration-300 hover:scale-105">
+                       Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
